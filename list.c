@@ -127,17 +127,17 @@ void list_add_to_front(list_t *l, elem value) {
 void list_add_at_index(list_t *l, elem value, int index) {
     // add node with given value at the given index
   
-  if (index == 0){
+  if (index == 1){
     list_add_to_front(l, value);
     return;
   }
-  int curr_indx = 0;
+  int current_index = 1;
 
   node_t *curr = l->head;
   node_t *prev = NULL;
   
   while (curr != NULL){
-    if (curr_indx == index){
+    if (current_index == index){
       node_t* new_node = (node_t *) malloc(sizeof(node_t));
       new_node->value = value;
       new_node->next = curr;
@@ -146,10 +146,10 @@ void list_add_at_index(list_t *l, elem value, int index) {
     }
     prev = curr;
     curr = curr->next;
-    curr_indx ++;
+    current_index ++;
   }
 
-  if (curr_indx == index){ // in case the index is at the end of the list
+  if (current_index == index){ // in case the index is at the end of the list
       list_add_to_back(l, value);
     }
   
@@ -199,13 +199,13 @@ elem list_remove_from_front(list_t *l) {
 
 elem list_remove_at_index(list_t *l, int index) { 
   // remove node at the given index of the list and deallocate its memory
-  int curr_indx = 0;
+  int current_index = 1;
 
   node_t *curr = l->head;
   node_t *prev;
 
   while (curr != NULL){
-    if (curr_indx == index){
+    if (current_index == index){
       elem output_value = curr->value;
       
       prev->next = curr->next;
@@ -216,7 +216,7 @@ elem list_remove_at_index(list_t *l, int index) {
     }
     prev = curr;
     curr = curr->next;
-    curr_indx++;
+    current_index++;
   }
   
   return -1;
@@ -236,7 +236,7 @@ bool list_is_in(list_t *l, elem value) {
 
 elem list_get_elem_at(list_t *l, int index) { 
   // return elem value at given index or -1 if index is out of range
-  int current_index = 0;
+  int current_index = 1;
   node_t *curr = l->head;
   while (curr != NULL){
     if (current_index == index){
@@ -250,7 +250,7 @@ return -1;
 
 int list_get_index_of(list_t *l, elem value) { 
   // return first index where given value occurs or -1 if not found
-  int current_index = 0;
+  int current_index = 1;
   node_t *curr = l->head;
   while (curr != NULL){
     if (curr->value == value){

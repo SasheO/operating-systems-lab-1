@@ -34,11 +34,11 @@ int main() {
   // }
 
   printf("------------------------\n");
-  list_add_at_index(mylist, 110, 0); // test adding element at the front of the list
-  printf("Testing list_add_at_index value 110, edge case index 0 (beginning of list): %s\n",listToString(mylist));
+  list_add_at_index(mylist, 110, 1); // test adding element at the front of the list
+  printf("Testing list_add_at_index value 110, edge case index 1 (beginning of list): %s\n",listToString(mylist));
 
-  list_add_at_index(mylist, 110, 11); // test adding element at the end of the list
-  printf("Testing list_add_at_index value 110, edge case index 11 (end of the list): %s\n",listToString(mylist));
+  list_add_at_index(mylist, 110, 12); // test adding element at the end of the list
+  printf("Testing list_add_at_index value 110, edge case index 12 (end of the list): %s\n",listToString(mylist));
   
   list_add_at_index(mylist, 110, 100); // test adding element at index way too big
   printf("Testing list_add_at_index value 110, edge case index 100 (out of bounds): %s\n",listToString(mylist));
