@@ -26,9 +26,7 @@ void list_free(list_t *l) {
     curr = NULL;
     curr = next;
   }
-
-  free(l);
-  l = NULL;
+  l->head = NULL;
 }
 
 void list_print(list_t *l) {
@@ -158,19 +156,28 @@ void list_add_at_index(list_t *l, elem value, int index) {
 elem list_remove_from_back(list_t *l) { 
     // remove node at the back of the list and deallocate its memory
 
+  node_t *prev;
+  node_t *curr = l->head;
+  elem output_value;
   
   if (l->head==NULL){ // edge case where list is empty
     return -1;
   }
 
-  node_t *curr = l->head;
-  node_t *prev;
+  if (curr->next == NULL){ // edge case where list is length 1
+    output_value = curr->value;
+    l->head = NULL;
+    free(curr);
+    curr = NULL;
+    return output_value;
+  }
+  
   while (curr->next != NULL){
     prev = curr;
     curr = curr->next;
   }
 
-  elem output_value = curr->value;
+  output_value = curr->value;
 
   prev->next = NULL;
   free(curr);
@@ -199,6 +206,11 @@ elem list_remove_from_front(list_t *l) {
 
 elem list_remove_at_index(list_t *l, int index) { 
   // remove node at the given index of the list and deallocate its memory
+  elem output_value;
+  if (index == 1){
+    output_value = list_remove_from_front(l);
+    return output_value;
+  }
   int current_index = 1;
 
   node_t *curr = l->head;
@@ -206,7 +218,7 @@ elem list_remove_at_index(list_t *l, int index) {
 
   while (curr != NULL){
     if (current_index == index){
-      elem output_value = curr->value;
+      output_value = curr->value;
       
       prev->next = curr->next;
       free(curr);
